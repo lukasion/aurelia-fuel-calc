@@ -209,6 +209,18 @@ module.exports = ({ production }, { analyze, hmr, port, host }) => ({
         // because Aurelia would try to require it again in runtime
         use: cssRules
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+          "postcss-loader"
+        ],
+      },
       // Skip minimize in production build to avoid complain on unescaped < such as
       // <span>${ c < 5 ? c : 'many' }</span>
       { test: /\.html$/i, loader: 'html-loader', options: { minimize: false } },
@@ -248,6 +260,6 @@ module.exports = ({ production }, { analyze, hmr, port, host }) => ({
      * remove those before the webpack build. In that case consider disabling the plugin, and instead use something like
      * `del` (https://www.npmjs.com/package/del), or `rimraf` (https://www.npmjs.com/package/rimraf).
      */
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
   ]
 });

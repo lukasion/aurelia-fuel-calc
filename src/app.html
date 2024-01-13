@@ -3,7 +3,7 @@
 
   <form submit.trigger="addTrip()">
     <input type="text" value.bind="tripDescription">
-    <button type="submit" disabled.bind="!tripDescription">Add Trip</button>
+    <button class="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900" type="submit" disabled.bind="!tripDescription">Add Trip</button>
   </form>
 
   <ul>
@@ -12,7 +12,7 @@
       <span style="text-decoration: ${trip.done ? 'line-through' : 'initial'}">
           ${trip.description}
         </span>
-      <button click.trigger="removeTrip(trip)">Remove</button>
+      <button class="btn" click.trigger="removeTrip(trip)">Remove</button>
     </li>
   </ul>
 </template>
