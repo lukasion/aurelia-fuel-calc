@@ -1,3 +1,18 @@
 <template>
-  <h1>${message}</h1>
+  <h1>${heading}</h1>
+
+  <form submit.trigger="addTrip()">
+    <input type="text" value.bind="tripDescription">
+    <button type="submit" disabled.bind="!tripDescription">Add Trip</button>
+  </form>
+
+  <ul>
+    <li repeat.for="trip of trips">
+      <input type="checkbox" checked.bind="trip.done">
+      <span style="text-decoration: ${trip.done ? 'line-through' : 'initial'}">
+          ${trip.description}
+        </span>
+      <button click.trigger="removeTrip(trip)">Remove</button>
+    </li>
+  </ul>
 </template>
