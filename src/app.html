@@ -1,18 +1,35 @@
 <template>
-  <h1>${heading}</h1>
+    <div class="container mx-auto px-10 py-5">
+        <h1 class="text-3xl font-bold text-center">${heading}</h1>
 
-  <form submit.trigger="addTrip()">
-    <input type="text" value.bind="tripDescription">
-    <button class="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900" type="submit" disabled.bind="!tripDescription">Add Trip</button>
-  </form>
+        <form class="flex justify-center mt-5 gap-3" submit.trigger="addTrip()">
+            <input class="input input-bordered" type="text" value.bind="tripDescription" placeholder="Name a trip">
+            <button class="btn btn-primary" type="submit" disabled.bind="!tripDescription">Add trip</button>
+        </form>
 
-  <ul>
-    <li repeat.for="trip of trips">
-      <input type="checkbox" checked.bind="trip.done">
-      <span style="text-decoration: ${trip.done ? 'line-through' : 'initial'}">
-          ${trip.description}
-        </span>
-      <button class="btn" click.trigger="removeTrip(trip)">Remove</button>
-    </li>
-  </ul>
+        <div if.bind="trips.length > 0" class="border rounded mt-5  max-w-[768px] mx-auto">
+            <table class="table table-zebra">
+              <tr>
+                <th></th>
+                <th>Trip</th>
+                <th>Action</th>
+              </tr>
+                <tr repeat.for="trip of trips">
+                    <td class="w-1">
+                        <input class="checkbox" type="checkbox" checked.bind="trip.done">
+                    </td>
+                    <td class="w-80">
+                      <span style="${trip.done ? 'text-decoration: line-through' : ''}">
+                        ${trip.description}
+                      </span>
+                    </td>
+                    <td class="w-1">
+                        <button class="btn btn-primary" click.trigger="removeTrip(trip)">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <p class="text-xs mt-5 text-center">Created by &copy; ellukasion</p>
+    </div>
 </template>
