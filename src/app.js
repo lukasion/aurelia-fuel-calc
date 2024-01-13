@@ -1,24 +1,17 @@
 export class App {
-  constructor() {
-    this.heading = 'Fuel Calculator';
-    this.trips = [];
-    this.tripDescription = '';
-  }
+    configureRouter(config, router) {
+        config.title = 'Aurelia';
+        config.map([
+            {
+                route: ['', 'fuel-calc'],
+                name: 'fuel-calc',
+                moduleId: PLATFORM.moduleName('./fuel-calc'),
+                nav: true,
+                title: 'Fuel Calc'
+            },
+            {route: 'trips', name: 'trips', moduleId: PLATFORM.moduleName('./trips'), nav: true, title: 'Trips'}
+        ]);
 
-  addTrip() {
-    if (this.tripDescription) {
-      this.trips.push({
-        description: this.tripDescription,
-        done: false
-      });
-      this.tripDescription = '';
+        this.router = router;
     }
-  }
-
-  removeTrip(trip) {
-    const index = this.trips.indexOf(trip);
-    if (index !== -1) {
-      this.trips.splice(index, 1);
-    }
-  }
 }
